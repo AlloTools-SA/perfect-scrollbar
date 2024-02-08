@@ -1,6 +1,6 @@
 /*!
- * perfect-scrollbar v1.5.3
- * Copyright 2021 Hyunje Jun, MDBootstrap and Contributors
+ * perfect-scrollbar v1.5.5
+ * Copyright 2024 Hyunje Jun, MDBootstrap and Contributors
  * Licensed under MIT
  */
 
@@ -13,6 +13,7 @@
   function get(element) {
     return getComputedStyle(element);
   }
+
 
   function set(element, obj) {
     for (var key in obj) {
@@ -964,6 +965,7 @@
     }
 
     function shouldHandle(e) {
+      console.log(e);
       if (e.pointerType && e.pointerType === 'pen' && e.buttons === 0) {
         return false;
       }
