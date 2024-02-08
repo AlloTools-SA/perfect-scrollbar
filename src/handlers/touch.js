@@ -51,6 +51,7 @@ export default function(i) {
   let startTime = 0;
   let speed = {};
   let easingLoop = null;
+  let countTouchMove = 0;
 
   function getTouch(e) {
     if (e.targetTouches) {
@@ -84,6 +85,7 @@ export default function(i) {
       return;
     }
 
+    countTouchMove = 0;
     const touch = getTouch(e);
 
     startOffset.pageX = touch.pageX;
@@ -142,7 +144,7 @@ export default function(i) {
   }
 
   function touchMove(e) {
-    if (shouldHandle(e)) {
+    if (shouldHandle(e) && countTouchMove++ > 2) {
       const touch = getTouch(e);
 
       const currentOffset = { pageX: touch.pageX, pageY: touch.pageY };
