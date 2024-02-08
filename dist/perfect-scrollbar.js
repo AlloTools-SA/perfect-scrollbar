@@ -14,7 +14,6 @@
     return getComputedStyle(element);
   }
 
-
   function set(element, obj) {
     for (var key in obj) {
       var val = obj[key];
@@ -923,8 +922,8 @@
         // user is perhaps trying to swipe up/down the page
 
         if (
-          (deltaY < 10 && scrollTop === i.contentHeight - i.containerHeight) ||
-          (deltaY > 10 && scrollTop === 0)
+          (deltaY < 0 && scrollTop === i.contentHeight - i.containerHeight) ||
+          (deltaY > 0 && scrollTop === 0)
         ) {
           // set prevent for mobile Chrome refresh
           return window.scrollY === 0 && deltaY > 0 && env.isChrome;
@@ -933,8 +932,8 @@
         // user is perhaps trying to swipe left/right across the page
 
         if (
-          (deltaX < 10 && scrollLeft === i.contentWidth - i.containerWidth) ||
-          (deltaX > 10 && scrollLeft === 0)
+          (deltaX < 0 && scrollLeft === i.contentWidth - i.containerWidth) ||
+          (deltaX > 0 && scrollLeft === 0)
         ) {
           return true;
         }
@@ -954,6 +953,7 @@
     var startTime = 0;
     var speed = {};
     var easingLoop = null;
+    var countTouchMove = 0;
 
     function getTouch(e) {
       if (e.targetTouches) {
@@ -967,7 +967,6 @@
     function shouldHandle(e) {
       console.log(e);
       if (e.pointerType && e.pointerType === 'pen' && e.buttons === 0) {
-        console.log('oierjoijgeroijgeroijoiegrjoj')
         return false;
       }
       if (e.targetTouches && e.targetTouches.length === 1) {
@@ -988,6 +987,7 @@
         return;
       }
 
+      countTouchMove = 0;
       var touch = getTouch(e);
 
       startOffset.pageX = touch.pageX;
@@ -1046,7 +1046,7 @@
     }
 
     function touchMove(e) {
-      if (shouldHandle(e)) {
+      if (shouldHandle(e) && countTouchMove++ > 2) {
         var touch = getTouch(e);
 
         var currentOffset = { pageX: touch.pageX, pageY: touch.pageY };

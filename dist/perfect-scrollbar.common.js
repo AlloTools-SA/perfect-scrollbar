@@ -949,6 +949,7 @@ function touch(i) {
   var startTime = 0;
   var speed = {};
   var easingLoop = null;
+  var countTouchMove = 0;
 
   function getTouch(e) {
     if (e.targetTouches) {
@@ -982,6 +983,7 @@ function touch(i) {
       return;
     }
 
+    countTouchMove = 0;
     var touch = getTouch(e);
 
     startOffset.pageX = touch.pageX;
@@ -1040,7 +1042,7 @@ function touch(i) {
   }
 
   function touchMove(e) {
-    if (shouldHandle(e)) {
+    if (shouldHandle(e) && countTouchMove++ > 2) {
       var touch = getTouch(e);
 
       var currentOffset = { pageX: touch.pageX, pageY: touch.pageY };
