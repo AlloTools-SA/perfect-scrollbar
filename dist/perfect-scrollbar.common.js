@@ -1042,7 +1042,7 @@ function touch(i) {
   }
 
   function touchMove(e) {
-    if (shouldHandle(e) && countTouchMove++ > 2) {
+    if (shouldHandle(e) && countTouchMove++ > 5) {
       var touch = getTouch(e);
 
       var currentOffset = { pageX: touch.pageX, pageY: touch.pageY };

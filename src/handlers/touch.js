@@ -144,7 +144,7 @@ export default function(i) {
   }
 
   function touchMove(e) {
-    if (shouldHandle(e) && countTouchMove++ > 2) {
+    if (shouldHandle(e) && countTouchMove++ > 5) {
       const touch = getTouch(e);
 
       const currentOffset = { pageX: touch.pageX, pageY: touch.pageY };
