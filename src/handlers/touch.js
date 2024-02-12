@@ -63,7 +63,6 @@ export default function(i) {
   }
 
   function shouldHandle(e) {
-    console.log(e);
     if (e.pointerType && e.pointerType === 'pen' && e.buttons === 0) {
       return false;
     }
@@ -144,7 +143,7 @@ export default function(i) {
   }
 
   function touchMove(e) {
-    if (shouldHandle(e) && countTouchMove++ > 5) {
+    if (shouldHandle(e) && (countTouchMove++ > 5 || e.touches[0].touchType === 'direct')) {
       const touch = getTouch(e);
 
       const currentOffset = { pageX: touch.pageX, pageY: touch.pageY };

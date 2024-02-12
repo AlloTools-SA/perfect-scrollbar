@@ -965,7 +965,6 @@
     }
 
     function shouldHandle(e) {
-      console.log(e);
       if (e.pointerType && e.pointerType === 'pen' && e.buttons === 0) {
         return false;
       }
@@ -1046,7 +1045,7 @@
     }
 
     function touchMove(e) {
-      if (shouldHandle(e) && countTouchMove++ > 5) {
+      if (shouldHandle(e) && (countTouchMove++ > 5 || e.touches[0].touchType === 'direct')) {
         var touch = getTouch(e);
 
         var currentOffset = { pageX: touch.pageX, pageY: touch.pageY };
